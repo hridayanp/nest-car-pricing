@@ -10,8 +10,11 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dtos';
 import { UsersService } from './users.service';
+import { UserDto } from './dtos/user.dto';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -29,6 +32,7 @@ export class UsersController {
     return user;
   }
 
+  @Get('/:id')
   @Get()
   findUserByEmail(@Query('email') email: string) {
     return this.usersService.find(email);
