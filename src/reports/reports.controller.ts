@@ -37,15 +37,7 @@ export class ReportsController {
   }
 
   @Get()
-  @Serialize(ReportDto)
   getEstimate(@Query() query: GetEstimateDto) {
-    return this.reportsService.createEstimate(
-      query.make,
-      query.model,
-      query.year,
-      query.lng,
-      query.lat,
-      query.mileage,
-    );
+    return this.reportsService.createEstimate(query);
   }
 }
